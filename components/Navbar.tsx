@@ -1,36 +1,8 @@
 import Link from "next/link";
 
+import { navItems } from "@/constants/navigation";
+
 export default function Navbar() {
-  const navItems = [
-    {
-      text: "Beranda",
-      href: "/",
-    },
-    {
-      text: "Terbaru",
-      href: "/",
-    },
-    {
-      text: "Hiburan",
-      href: "/",
-    },
-    {
-      text: "Gaya Hidup",
-      href: "/",
-    },
-    {
-      text: "Olahraga",
-      href: "/",
-    },
-    {
-      text: "Nasional",
-      href: "/",
-    },
-    {
-      text: "Internasional",
-      href: "/",
-    },
-  ];
   return (
     <div className="flex flex-row py-7 justify-between">
       <Link href="/" className="flex gap-3">
