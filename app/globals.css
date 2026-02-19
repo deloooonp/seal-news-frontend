@@ -22,3 +22,27 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
 }
+
+.text-hero {
+  @apply text-4xl font-bold;
+}
+
+.text-section-title {
+  @apply text-2xl font-bold;
+}
+
+.text-body {
+  @apply text-base font-normal leading-6;
+}
+
+.text-body-sm {
+  @apply text-sm font-medium leading-6;
+}
+
+.text-body-md {
+  @apply text-base font-medium leading-6;
+}
+
+.text-body-lg {
+  @apply text-lg font-semibold leading-7;
+}
