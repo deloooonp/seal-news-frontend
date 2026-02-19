@@ -9,6 +9,7 @@
   --primary-text: #637381;
   --secondary-text: #8899a8;
   --stroke: #dfe4ea;
+  --button-primary: #0090ff;
 }
 
 @theme inline {
@@ -20,6 +21,7 @@
   --color-primary-text: var(--primary-text);
   --color-secondary-text: var(--secondary-text);
   --color-stroke: var(--stroke);
+  --color-button-primary: var(--button-primary);
 
   --font-sans: var(--font-inter);
 }
@@ -52,4 +54,8 @@ body {
 
 .text-body-lg {
   @apply text-lg font-semibold leading-7;
+}
+
+.text-body-xl {
+  @apply text-xl font-semibold leading-7;
 }

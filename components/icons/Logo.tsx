@@ -1,9 +1,6 @@
-interface LogoProps {
-  className?: string;
-  size?: number;
-}
+import { IconProps } from "@/types/common";
 
-export default function Logo({ className, size = 44 }: LogoProps) {
+export default function Logo({ className, size = 44 }: IconProps) {
   return (
     <svg
       width={size}
