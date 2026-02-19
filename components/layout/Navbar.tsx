@@ -15,7 +15,7 @@ export default function Navbar() {
           {navItems.map((item) => (
             <li key={item.text}>
               <Link
-                className="hover:text-primary transition-colors duration-300"
+                className="hover:text-primary transition-colors"
                 href={item.href}
               >
                 {item.text}
