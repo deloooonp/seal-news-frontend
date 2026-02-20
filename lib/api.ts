@@ -7,6 +7,7 @@ export function transformNews(rawItem: any): NewsItem {
     contentSnippet: rawItem.contentSnippet,
     isoDate: rawItem.isoDate,
     image: rawItem.image?.large || rawItem.image?.small || rawItem.image,
+    category: rawItem.category,
   };
 }
 

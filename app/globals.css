@@ -4,12 +4,11 @@
   --background: #ffffff;
   --foreground: #111928;
 
-  --primary: #3758f9;
+  --primary: #0090ff;
   --secondary: #13c296;
   --primary-text: #333333;
   --secondary-text: #8899a8;
   --stroke: #dfe4ea;
-  --button-primary: #0090ff;
 }
 
 @theme inline {
@@ -21,7 +20,6 @@
   --color-primary-text: var(--primary-text);
   --color-secondary-text: var(--secondary-text);
   --color-stroke: var(--stroke);
-  --color-button-primary: var(--button-primary);
 
   --font-sans: var(--font-inter);
 }

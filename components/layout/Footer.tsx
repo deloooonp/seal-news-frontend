@@ -37,7 +37,7 @@ export default function Footer() {
             {footerLinks.telusuri.map((item) => (
               <li key={item.text}>
                 <Link
-                  className="hover:text-secondary-text transition-colors"
+                  className="hover:text-primary transition-colors"
                   href={item.href}
                 >
                   {item.text}
@@ -52,7 +52,7 @@ export default function Footer() {
             {footerLinks.bantuan.map((item) => (
               <li key={item.text}>
                 <Link
-                  className="hover:text-secondary-text transition-colors"
+                  className="hover:text-primary transition-colors"
                   href={item.href}
                 >
                   {item.text}
@@ -69,7 +69,7 @@ export default function Footer() {
               placeholder="Masukan email"
               className="outline-none"
             />
-            <button className="flex justify-center items-center h-12 w-12 bg-button-primary rounded-lg p-1 cursor-pointer hover:bg-button-primary/80 transition-all hover:scale-110">
+            <button className="flex justify-center items-center h-12 w-12 bg-primary rounded-lg p-1 cursor-pointer hover:bg-primary/80 transition-all hover:scale-110">
               <Send className="text-background" />
             </button>
           </div>

@@ -1,4 +1,4 @@
-import Headline from "./components/Headline";
+import { Headline, PopularNews } from "./components";
 import { getCNNNews } from "@/lib/api";
 
 export default async function page() {
@@ -6,6 +6,7 @@ export default async function page() {
   return (
     <main>
       <Headline news={news} />
+      <PopularNews news={news} />
     </main>
   );
 }
