@@ -1,12 +1,13 @@
 import { Headline, PopularNews } from "./components";
-import { getCNNNews } from "@/lib/api";
+import { getHomeData } from "@/lib/api";
 
 export default async function page() {
-  const news = await getCNNNews();
+  const { headlineNews, popularNews } = await getHomeData();
+
   return (
     <main>
-      <Headline news={news} />
-      <PopularNews news={news} />
+      <Headline news={headlineNews} />
+      <PopularNews news={popularNews} />
     </main>
   );
 }

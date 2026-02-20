@@ -13,19 +13,22 @@ export default function PopularNews({ news }: { news: NewsItem[] }) {
       <ul className="flex gap-6 items-center">
         {popularNews.map((item, i) => (
           <React.Fragment key={item.title + i}>
-            <li className="min-w-100 relative flex gap-4 p-4 cursor-pointer hover:bg-primary/20 hover:scale-105 rounded-xl transition-all duration-250">
+            <li className="w-1/3 relative flex gap-4 p-4 cursor-pointer hover:bg-primary/15 hover:scale-105 rounded-xl transition-all duration-250">
               <span className="rounded-full bg-foreground absolute left-1 top-1 p-2 text-background z-10 w-9 h-9 items-center justify-center flex text-body-lg">
                 {i + 1}
               </span>
               <img
-                className="h-32 w-40 rounded-xl"
+                className="h-30 w-38 rounded-xl"
                 src={item.image}
                 alt={item.title}
               />
               <div className="flex flex-col gap-4">
-                <h2 className="text-body-md">{item.title}</h2>
-                <div className="flex gap-1">
-                  <span className="text-body-sm text-primary">Politik</span>
+                <h2 className="text-body-md line-clamp-3">{item.title}</h2>
+                <div className="flex">
+                  <span className="text-body-sm text-primary">
+                    {item.category.slice(0, 1).toUpperCase() +
+                      item.category.slice(1)}
+                  </span>
                   <Dot className="text-secondary-text" />
                   <span className="text-body-sm text-secondary-text">
                     {new Date(item.isoDate).toLocaleDateString("id-ID", {

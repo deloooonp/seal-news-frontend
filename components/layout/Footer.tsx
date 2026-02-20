@@ -7,7 +7,7 @@ import { Send } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="py-16 bg-[#2c3c4d] text-background">
-      <div className="flex flex-row justify-between mx-auto max-w-300">
+      <div className="flex flex-row justify-between mx-auto max-w-330">
         <div className="flex flex-col">
           <div className="flex flex-row items-center gap-5">
             <Logo size={68} />
