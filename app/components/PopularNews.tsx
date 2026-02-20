@@ -1,6 +1,8 @@
-import { NewsItem } from "@/types/news";
 import { Dot } from "lucide-react";
 import React from "react";
+import Image from "next/image";
+
+import { NewsItem } from "@/types/news";
 
 export default function PopularNews({ news }: { news: NewsItem[] }) {
   const popularNews = news.slice(0, 3);
@@ -17,11 +19,14 @@ export default function PopularNews({ news }: { news: NewsItem[] }) {
               <span className="rounded-full bg-foreground absolute left-1 top-1 p-2 text-background z-10 w-9 h-9 items-center justify-center flex text-body-lg">
                 {i + 1}
               </span>
-              <img
-                className="h-30 w-38 rounded-xl"
-                src={item.image}
-                alt={item.title}
-              />
+              <div className="relative h-32 w-40 shrink-0">
+                <Image
+                  fill
+                  src={item.image}
+                  alt={item.title}
+                  className="object-cover rounded-xl"
+                />
+              </div>
               <div className="flex flex-col gap-4">
                 <h2 className="text-body-md line-clamp-3">{item.title}</h2>
                 <div className="flex">
