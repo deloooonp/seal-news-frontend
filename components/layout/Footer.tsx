@@ -22,7 +22,7 @@ export default function Footer() {
               <li key={name}>
                 <Link href={href}>
                   <Icon
-                    className="hover:scale-110 hover:text-primary transition-transform duration-150"
+                    className="hover:scale-110 hover:text-primary transition-all duration-200"
                     color="white"
                     size={40}
                   />
