@@ -13,7 +13,7 @@ export default function PopularNews({ news }: { news: NewsItem[] }) {
       <ul className="flex gap-6 items-center">
         {popularNews.map((item, i) => (
           <React.Fragment key={item.title + i}>
-            <li className="min-w-100 relative flex gap-4 p-4 cursor-pointer">
+            <li className="min-w-100 relative flex gap-4 p-4 cursor-pointer hover:bg-primary/20 hover:scale-105 rounded-xl transition-all duration-250">
               <span className="rounded-full bg-foreground absolute left-1 top-1 p-2 text-background z-10 w-9 h-9 items-center justify-center flex text-body-lg">
                 {i + 1}
               </span>
