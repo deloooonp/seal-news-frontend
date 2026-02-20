@@ -38,11 +38,17 @@ export async function getHomeData() {
   const allCategoriesNews = await Promise.all(
     categories.map((cat) => getCNNNews(cat)),
   );
-  const popularNews = allCategoriesNews.map((news) => news[0]).filter(Boolean);
 
+  const popularNews = allCategoriesNews.map((news) => news[0]).filter(Boolean);
   const headlineNews = allCategoriesNews[0];
+  const recommendedNews = allCategoriesNews
+    .flat()
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 80);
+
   return {
     headlineNews,
     popularNews,
+    recommendedNews,
   };
 }
