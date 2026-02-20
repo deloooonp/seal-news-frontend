@@ -1,29 +1,45 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { NewsItem } from "@/types/news";
 
 export default function Headline({ news }: { news: NewsItem[] }) {
   const headlineNews = news.slice(0, 5);
-  console.log(headlineNews);
+
+  const [currentNews, setCurrentNews] = useState(1);
+
+  const handleNext = () => {
+    setCurrentNews((prev) => Math.min(prev + 1, headlineNews.length));
+  };
+
+  const handlePrevious = () => {
+    setCurrentNews((prev) => Math.max(prev - 1, 1));
+  };
+
   return (
     <section className="py-18">
-      <div className="flex justify-between mb-11">
+      <div className="flex justify-between mb-11 h-[340px]">
         <div className="flex flex-col gap-4 max-w-lg">
           <h2 className="text-body-md text-secondary-text">Headline</h2>
           <h1 className="text-display text-primary-text">
-            {headlineNews[0].title}
+            {headlineNews[currentNews - 1].title}
           </h1>
           <p className="text-body text-secondary-text">
-            {headlineNews[0].contentSnippet}
+            {headlineNews[currentNews - 1].contentSnippet}
           </p>
           <span className="flex items-center gap-2 text-body-md text-secondary-text">
             <Calendar />
-            {new Date(headlineNews[0].isoDate).toLocaleDateString("id-ID", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
+            {new Date(headlineNews[currentNews - 1].isoDate).toLocaleDateString(
+              "id-ID",
+              {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              },
+            )}
           </span>
           <button className="flex items-center gap-2 text-body-md text-primary">
             Baca Selengkapnya
@@ -31,19 +47,25 @@ export default function Headline({ news }: { news: NewsItem[] }) {
           </button>
         </div>
         <Image
-          src={headlineNews[0].image}
-          alt={headlineNews[0].title}
+          src={headlineNews[currentNews - 1].image}
+          alt={headlineNews[currentNews - 1].title}
           width={550}
           height={300}
           className="rounded-2xl"
         />
       </div>
       <div className="flex justify-center gap-4 text-body-md text-primary-text">
-        <ChevronLeft />
-        <span>1</span>
+        <ChevronLeft
+          onClick={handlePrevious}
+          className="cursor-pointer hover:text-primary transition-colors"
+        />
+        <span>{currentNews}</span>
         <span>dari</span>
         <span>{headlineNews.length}</span>
-        <ChevronRight />
+        <ChevronRight
+          onClick={handleNext}
+          className="cursor-pointer hover:text-primary transition-colors"
+        />
       </div>
     </section>
   );
