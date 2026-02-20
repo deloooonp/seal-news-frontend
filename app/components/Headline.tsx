@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { NewsItem } from "@/types/news";
@@ -12,12 +12,20 @@ export default function Headline({ news }: { news: NewsItem[] }) {
   const [currentNews, setCurrentNews] = useState(1);
 
   const handleNext = () => {
-    setCurrentNews((prev) => Math.min(prev + 1, headlineNews.length));
+    setCurrentNews((prev) => (prev % headlineNews.length) + 1);
   };
 
   const handlePrevious = () => {
-    setCurrentNews((prev) => Math.max(prev - 1, 1));
+    setCurrentNews((prev) => (prev === 1 ? headlineNews.length : prev - 1));
   };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleNext();
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [currentNews]);
 
   return (
     <section className="py-18">
