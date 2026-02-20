@@ -29,7 +29,7 @@ export default function Headline({ news }: { news: NewsItem[] }) {
 
   return (
     <section className="py-18">
-      <div className="flex justify-between mb-11 h-[340px]">
+      <div className="flex justify-between mb-11 h-85">
         <div className="flex flex-col gap-4 max-w-lg">
           <h2 className="text-body-md text-secondary-text">Headline</h2>
           <h1 className="text-display text-primary-text">
