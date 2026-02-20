@@ -11,7 +11,7 @@ export default function Navbar() {
           <Logo className="text-primary" />
           <span className="flex text-xl font-semibold">Berita Kini</span>
         </Link>
-        <ul className="flex gap-8 text-body-medium items-center text-primary-text">
+        <ul className="flex gap-8 text-body-medium items-center text-secondary-text">
           {navItems.map((item) => (
             <li key={item.text}>
               <Link

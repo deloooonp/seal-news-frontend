@@ -6,7 +6,7 @@
 
   --primary: #3758f9;
   --secondary: #13c296;
-  --primary-text: #637381;
+  --primary-text: #333333;
   --secondary-text: #8899a8;
   --stroke: #dfe4ea;
   --button-primary: #0090ff;
@@ -32,8 +32,8 @@ body {
   font-family: var(--font-inter), sans-serif;
 }
 
-.text-hero {
-  @apply text-4xl font-bold;
+.text-display {
+  @apply text-4xl font-bold leading-[130%];
 }
 
 .text-section-title {
