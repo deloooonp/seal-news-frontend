@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { NewsItem } from "@/types/news";
+import { getPaginationItems } from "@/lib/utils";
 
 export default function RecommendedNews({ news }: { news: NewsItem[] }) {
   const [currentPage, setCurrentPage] = useState(0);
@@ -16,7 +17,7 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
   const currentNews = news.slice(indexOfFirstItem, indexOfLastItem);
 
   const handleNext = () => {
-    if (currentPage >= totalPages) return;
+    if (currentPage >= totalPages - 1) return;
     setCurrentPage((prev) => prev + 1);
   };
 
@@ -90,16 +91,27 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
             <ChevronLeft />
             Previous
           </li>
-          {[...Array(totalPages)].slice(0, 5).map((_, i) => (
-            <li
-              key={i}
-              onClick={() => handlePageClick(i)}
-              className={`w-10 h-10 flex justify-center items-center rounded-xl cursor-pointer transition-colors duration-200
-          ${currentPage === i ? "bg-primary text-background" : "hover:bg-primary/15"}`}
-            >
-              {i + 1}
-            </li>
-          ))}
+          {getPaginationItems({ currentPage, totalPages }).map(
+            (page, index) => {
+              if (page === "...") {
+                return (
+                  <li key={`dots-${index}`} className="cursor-default">
+                    ...
+                  </li>
+                );
+              }
+              return (
+                <li
+                  key={index}
+                  onClick={() => handlePageClick(page as number)}
+                  className={`w-10 h-10 flex cursor-pointer justify-center items-center rounded-xl transition-all duration-200
+          ${currentPage === page ? "bg-primary text-background" : "hover:bg-stroke/50"}`}
+                >
+                  {(page as number) + 1}
+                </li>
+              );
+            },
+          )}
           <li
             onClick={handleNext}
             className={`flex items-center gap-2 cursor-pointer ${currentPage === totalPages - 1 ? "opacity-50 pointer-events-none" : ""}`}
