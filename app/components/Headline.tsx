@@ -5,6 +5,7 @@ import { NewsItem } from "@/types/news";
 
 export default function Headline({ news }: { news: NewsItem[] }) {
   const headlineNews = news.slice(0, 5);
+  console.log(headlineNews);
   return (
     <section className="py-18">
       <div className="flex justify-between mb-11">
@@ -14,7 +15,7 @@ export default function Headline({ news }: { news: NewsItem[] }) {
             {headlineNews[0].title}
           </h1>
           <p className="text-body text-secondary-text">
-            {headlineNews[0].description}
+            {headlineNews[0].contentSnippet}
           </p>
           <span className="flex items-center gap-2 text-body-md text-secondary-text">
             <Calendar />

@@ -4,5 +4,4 @@ export interface NewsItem {
   contentSnippet: string;
   isoDate: string;
   image: string;
-  description: string;
 }
