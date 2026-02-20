@@ -1,9 +1,11 @@
 import Headline from "./components/Headline";
+import { getCNNNews } from "@/lib/api";
 
-export default function page() {
+export default async function page() {
+  const news = await getCNNNews();
   return (
     <main>
-      <Headline />
+      <Headline news={news} />
     </main>
   );
 }
