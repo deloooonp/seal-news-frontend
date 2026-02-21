@@ -7,8 +7,8 @@ import { Send } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="py-16 bg-[#2c3c4d] text-background">
-      <div className="flex flex-row justify-between mx-auto max-w-330">
-        <div className="flex flex-col">
+      <div className="grid grid-cols-4 gap-4 px-6 lg:px-4 lg:max-w-330 mx-auto">
+        <div className="col-span-4 md:col-span-2 lg:col-span-1">
           <div className="flex flex-row items-center gap-5">
             <Logo size={68} />
             <p className="text-3xl font-semibold">Berita Kini</p>
@@ -31,7 +31,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div className="flex flex-col">
+        <div className="col-span-4 md:col-span-2 lg:col-span-1">
           <h2 className="text-body-xl mb-5">Telusuri</h2>
           <ul className="flex flex-col gap-4 text-body-md">
             {footerLinks.telusuri.map((item) => (
@@ -46,7 +46,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div className="flex flex-col">
+        <div className="col-span-4 md:col-span-2 lg:col-span-1">
           <h2 className="text-body-xl mb-5">Bantuan</h2>
           <ul className="flex flex-col gap-4 text-body-md">
             {footerLinks.bantuan.map((item) => (
@@ -61,15 +61,15 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div className="flex flex-col">
+        <div className="col-span-4 md:col-span-2 lg:col-span-1">
           <h2 className="text-body-xl mb-5">Berlangganan Berita Terbaru</h2>
-          <div className="flex justify-between items-center h-16 w-84 bg-background rounded-lg p-2 text-foreground">
+          <div className="flex justify-between items-center w-full bg-background rounded-lg p-2 text-foreground">
             <input
               type="text"
               placeholder="Masukan email"
               className="outline-none"
             />
-            <button className="flex justify-center items-center h-12 w-12 bg-primary rounded-lg p-1 cursor-pointer hover:bg-primary/80 transition-all hover:scale-110">
+            <button className="bg-primary rounded-lg p-3 cursor-pointer hover:bg-primary/80 transition-all hover:scale-110">
               <Send className="text-background" />
             </button>
           </div>

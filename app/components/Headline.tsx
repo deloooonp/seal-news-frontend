@@ -9,14 +9,14 @@ import { NewsItem } from "@/types/news";
 export default function Headline({ news }: { news: NewsItem[] }) {
   const headlineNews = news.slice(0, 5);
 
-  const [currentNews, setCurrentNews] = useState(1);
+  const [currentNews, setCurrentNews] = useState(0);
 
   const handleNext = () => {
-    setCurrentNews((prev) => (prev % headlineNews.length) + 1);
+    setCurrentNews((prev) => (prev + 1) % headlineNews.length);
   };
 
   const handlePrevious = () => {
-    setCurrentNews((prev) => (prev === 1 ? headlineNews.length : prev - 1));
+    setCurrentNews((prev) => (prev === 0 ? headlineNews.length - 1 : prev - 1));
   };
 
   useEffect(() => {
@@ -29,18 +29,18 @@ export default function Headline({ news }: { news: NewsItem[] }) {
 
   return (
     <section className="py-18">
-      <div className="flex justify-between mb-11 h-85">
-        <div className="flex flex-col gap-4 max-w-lg">
+      <div className="flex flex-col lg:flex-row justify-between mb-11 gap-8">
+        <div className="flex flex-col gap-4">
           <h2 className="text-body-md text-secondary-text">Headline</h2>
           <h1 className="text-display text-primary-text">
-            {headlineNews[currentNews - 1].title}
+            {headlineNews[currentNews].title}
           </h1>
           <p className="text-body text-secondary-text">
-            {headlineNews[currentNews - 1].contentSnippet}
+            {headlineNews[currentNews].contentSnippet}
           </p>
           <span className="flex items-center gap-2 text-body-md text-secondary-text">
             <Calendar />
-            {new Date(headlineNews[currentNews - 1].isoDate).toLocaleDateString(
+            {new Date(headlineNews[currentNews].isoDate).toLocaleDateString(
               "id-ID",
               {
                 day: "numeric",
@@ -55,11 +55,11 @@ export default function Headline({ news }: { news: NewsItem[] }) {
           </button>
         </div>
         <Image
-          src={headlineNews[currentNews - 1].image}
-          alt={headlineNews[currentNews - 1].title}
+          src={headlineNews[currentNews].image}
+          alt={headlineNews[currentNews].title}
           width={550}
           height={300}
-          className="rounded-2xl"
+          className="rounded-2xl object-cover w-full"
         />
       </div>
       <div className="flex justify-center gap-4 text-body-md text-primary-text">
@@ -67,7 +67,7 @@ export default function Headline({ news }: { news: NewsItem[] }) {
           onClick={handlePrevious}
           className="cursor-pointer hover:text-primary transition-colors"
         />
-        <span>{currentNews}</span>
+        <span>{currentNews + 1}</span>
         <span>dari</span>
         <span>{headlineNews.length}</span>
         <ChevronRight

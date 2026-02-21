@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import Logo from "../icons/Logo";
 import { navItems } from "@/constants/navigation";
+import { Menu } from "lucide-react";
 
 export default function Navbar() {
   return (
@@ -11,7 +12,7 @@ export default function Navbar() {
           <Logo className="text-primary" />
           <span className="flex text-xl font-semibold">Berita Kini</span>
         </Link>
-        <ul className="flex gap-8 text-body-medium items-center text-secondary-text">
+        <ul className="hidden lg:flex gap-8 text-body-medium items-center text-secondary-text">
           {navItems.map((item) => (
             <li key={item.text}>
               <Link
@@ -23,6 +24,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+        <Menu className="lg:hidden text-secondary-text" />
       </nav>
     </header>
   );

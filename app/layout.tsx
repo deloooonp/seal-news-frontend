@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
-        <div className="mx-auto max-w-330">
+        <div className="mx-auto px-6 lg:px-4 lg:max-w-330">
           <Navbar />
           {children}
         </div>

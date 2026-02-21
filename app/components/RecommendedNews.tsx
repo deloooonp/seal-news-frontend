@@ -32,12 +32,12 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
 
   return (
     <section className="py-18 flex flex-col gap-8">
-      <div className="flex justify-between">
+      <div className="flex md:flex-row flex-col gap-4 justify-between">
         <div className="flex items-center gap-4">
           <div className="bg-primary w-1 h-8 rounded-xl"></div>
           <h2 className="text-section-title">Rekomendasi Untuk Anda</h2>
         </div>
-        <div className="flex justify-between gap-2 p-4 border border-stroke rounded-lg w-1/3">
+        <div className="flex justify-between gap-2 p-4 border border-stroke rounded-lg md:w-1/3">
           <input
             type="text"
             placeholder="Cari disini..."
@@ -46,7 +46,7 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
           <Search />
         </div>
       </div>
-      <ul className="grid grid-cols-4 gap-14 mb-16">
+      <ul className="grid grid-cols-2 lg:grid-cols-4 gap-14 mb-16">
         {currentNews.map((item, i) => (
           <li key={item.title + i}>
             <div className="hover:bg-primary/15 hover:scale-105 cursor-pointer transition-all duration-250 flex flex-col p-2 rounded-lg">
@@ -60,12 +60,12 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
               <h2 className="text-body-lg text-primary-text line-clamp-3 mt-4 mb-3">
                 {item.title}
               </h2>
-              <div className="flex">
+              <div className="flex flex-col md:flex-row">
                 <span className="text-body-sm text-primary">
                   {item.category.slice(0, 1).toUpperCase() +
                     item.category.slice(1)}
                 </span>
-                <Dot className="text-secondary-text" />
+                <Dot className="hidden md:block text-secondary-text" />
                 <span className="text-body-sm text-secondary-text">
                   {new Date(item.isoDate).toLocaleDateString("id-ID", {
                     day: "numeric",
@@ -78,15 +78,15 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
           </li>
         ))}
       </ul>
-      <div className="flex justify-between items-center text-secondary-text">
+      <div className="flex md:flex-row flex-col gap-4 justify-between items-center text-secondary-text">
         <span className="text-body">
           Showing {indexOfFirstItem + 1} to {indexOfLastItem} of {news.length}{" "}
           results
         </span>
-        <ul className="flex items-center gap-5 text-body-md">
+        <ul className="flex items-center gap-1 md:gap-5 text-body-sm md:text-body-md">
           <li
             onClick={handlePrev}
-            className={`flex items-center gap-2 cursor-pointer ${currentPage === 0 ? "opacity-50 pointer-events-none" : ""}`}
+            className={`flex items-center md:gap-2 cursor-pointer ${currentPage === 0 ? "opacity-50 pointer-events-none" : ""}`}
           >
             <ChevronLeft />
             Previous
@@ -114,7 +114,7 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
           )}
           <li
             onClick={handleNext}
-            className={`flex items-center gap-2 cursor-pointer ${currentPage === totalPages - 1 ? "opacity-50 pointer-events-none" : ""}`}
+            className={`flex items-center md:gap-2 cursor-pointer ${currentPage === totalPages - 1 ? "opacity-50 pointer-events-none" : ""}`}
           >
             Next
             <ChevronRight />
