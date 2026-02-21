@@ -26,7 +26,11 @@ export default async function DetailNewsPage({
           <RelatedNews relatedNews={relatedNews} currentSlug={slug} />
         </div>
         <aside className="w-full">
-          <PopularNews news={popularNews} variant="sidebar" />
+          <PopularNews
+            news={popularNews}
+            variant="sidebar"
+            currentSlug={slug}
+          />
         </aside>
       </div>
     </main>

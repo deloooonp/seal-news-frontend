@@ -1,16 +1,26 @@
 import { Dot } from "lucide-react";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
+import { slugify } from "@/lib/utils";
 import { NewsItem } from "@/types/news";
 
 interface Props {
   news: NewsItem[];
   variant?: "home" | "sidebar";
+  currentSlug?: string;
 }
 
-export default function PopularNews({ news, variant = "home" }: Props) {
-  const popularNews = news.slice(0, 3);
+export default function PopularNews({
+  news,
+  variant = "home",
+  currentSlug,
+}: Props) {
+  const filteredNews = currentSlug
+    ? news.filter((item) => slugify(item.title) !== currentSlug)
+    : news;
+  const popularNews = filteredNews.slice(0, 3);
   return (
     <section
       className={`${variant === "sidebar" ? "py-0" : "py-18"} flex flex-col gap-8`}
@@ -22,43 +32,48 @@ export default function PopularNews({ news, variant = "home" }: Props) {
       <ul
         className={`flex ${variant === "home" ? "flex-col lg:flex-row items-center gap-6" : "flex-col gap-4"}`}
       >
-        {popularNews.map((item, i) => (
-          <React.Fragment key={item.title + i}>
-            <li className="w-full relative flex gap-4 p-4 cursor-pointer hover:bg-primary/15 hover:scale-105 rounded-xl transition-all duration-250">
-              <span className="rounded-full bg-foreground absolute left-1 top-1 p-2 text-background z-10 w-9 h-9 items-center justify-center flex text-body-lg">
-                {i + 1}
-              </span>
-              <div className="relative h-40 w-48 lg:h-32 lg:w-40 shrink-0">
-                <Image
-                  fill
-                  src={item.image}
-                  alt={item.title}
-                  className="object-cover rounded-xl"
-                />
-              </div>
-              <div className="flex flex-col gap-4">
-                <h2 className="text-body-md line-clamp-3">{item.title}</h2>
-                <div className="flex md:flex-row flex-col tracking-tight">
-                  <span className="text-body-sm text-primary">
-                    {item.category.slice(0, 1).toUpperCase() +
-                      item.category.slice(1)}
+        {popularNews.map((item, i) => {
+          const href = `/${item.category}/${slugify(item.title)}`;
+          return (
+            <React.Fragment key={item.title + i}>
+              <li className="w-full relative p-4 cursor-pointer hover:bg-primary/15 hover:scale-105 rounded-xl transition-all duration-250">
+                <Link href={href} className="flex gap-4">
+                  <span className="rounded-full bg-foreground absolute left-1 top-1 p-2 text-background z-10 w-9 h-9 items-center justify-center flex text-body-lg">
+                    {i + 1}
                   </span>
-                  <Dot className="hidden md:block text-secondary-text" />
-                  <span className="text-body-sm text-secondary-text">
-                    {new Date(item.isoDate).toLocaleDateString("id-ID", {
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric",
-                    })}
-                  </span>
-                </div>
-              </div>
-            </li>
-            {variant === "home" && i < popularNews.length - 1 && (
-              <div className="hidden lg:block w-px h-20 bg-secondary-text shrink-0"></div>
-            )}
-          </React.Fragment>
-        ))}
+                  <div className="relative h-40 w-48 lg:h-32 lg:w-40 shrink-0">
+                    <Image
+                      fill
+                      src={item.image}
+                      alt={item.title}
+                      className="object-cover rounded-xl"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <h2 className="text-body-md line-clamp-3">{item.title}</h2>
+                    <div className="flex md:flex-row flex-col tracking-tight">
+                      <span className="text-body-sm text-primary">
+                        {item.category.slice(0, 1).toUpperCase() +
+                          item.category.slice(1)}
+                      </span>
+                      <Dot className="hidden md:block text-secondary-text" />
+                      <span className="text-body-sm text-secondary-text">
+                        {new Date(item.isoDate).toLocaleDateString("id-ID", {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+              {variant === "home" && i < popularNews.length - 1 && (
+                <div className="hidden lg:block w-px h-20 bg-secondary-text shrink-0"></div>
+              )}
+            </React.Fragment>
+          );
+        })}
       </ul>
     </section>
   );
