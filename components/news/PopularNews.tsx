@@ -4,18 +4,25 @@ import Image from "next/image";
 
 import { NewsItem } from "@/types/news";
 
-export default function PopularNews({ news }: { news: NewsItem[] }) {
+interface Props {
+  news: NewsItem[];
+  variant?: "home" | "sidebar";
+}
+
+export default function PopularNews({ news, variant = "home" }: Props) {
   const popularNews = news.slice(0, 3);
   return (
     <section className="py-18 flex flex-col gap-8">
       <div className="flex items-center gap-4">
         <div className="bg-primary w-1 h-8 rounded-xl"></div>
-        <h2 className="text-section-title">Popular News</h2>
+        <h2 className="text-section-title">Berita Terpopuler</h2>
       </div>
-      <ul className="flex flex-col lg:flex-row gap-6 items-center">
+      <ul
+        className={`flex ${variant === "home" ? "flex-col lg:flex-row items-center gap-6" : "flex-col gap-4"}`}
+      >
         {popularNews.map((item, i) => (
           <React.Fragment key={item.title + i}>
-            <li className="w-full lg:w-1/3 relative flex gap-4 p-4 cursor-pointer hover:bg-primary/15 hover:scale-105 rounded-xl transition-all duration-250">
+            <li className="w-full relative flex gap-4 p-4 cursor-pointer hover:bg-primary/15 hover:scale-105 rounded-xl transition-all duration-250">
               <span className="rounded-full bg-foreground absolute left-1 top-1 p-2 text-background z-10 w-9 h-9 items-center justify-center flex text-body-lg">
                 {i + 1}
               </span>
@@ -45,7 +52,7 @@ export default function PopularNews({ news }: { news: NewsItem[] }) {
                 </div>
               </div>
             </li>
-            {i < popularNews.length - 1 && (
+            {variant === "home" && i < popularNews.length - 1 && (
               <div className="hidden lg:block w-px h-20 bg-secondary-text shrink-0"></div>
             )}
           </React.Fragment>
