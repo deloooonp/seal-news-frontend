@@ -1,5 +1,5 @@
 import NewsCard from "@/components/news/NewsCard";
-import { slugify } from "@/lib/utils";
+import { filterCurrentNews } from "@/lib/utils";
 
 export default function RelatedNews({
   relatedNews,
@@ -20,12 +20,9 @@ export default function RelatedNews({
         </button>
       </div>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 list-none">
-        {relatedNews
-          .filter((item) => slugify(item.title) !== currentSlug)
-          .slice(0, 3)
-          .map((item, i) => {
-            return <NewsCard key={item.title + i} item={item} />;
-          })}
+        {filterCurrentNews(relatedNews, currentSlug, 3).map((item, i) => {
+          return <NewsCard key={item.title + i} item={item} />;
+        })}
       </ul>
     </section>
   );

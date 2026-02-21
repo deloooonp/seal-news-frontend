@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { slugify } from "@/lib/utils";
+import { filterCurrentNews } from "@/lib/utils";
 import { NewsItem } from "@/types/news";
 
 interface Props {
@@ -17,10 +17,10 @@ export default function PopularNews({
   variant = "home",
   currentSlug,
 }: Props) {
-  const filteredNews = currentSlug
-    ? news.filter((item) => slugify(item.title) !== currentSlug)
-    : news;
-  const popularNews = filteredNews.slice(0, 3);
+  const popularNews = currentSlug
+    ? filterCurrentNews(news, currentSlug, 3)
+    : news.slice(0, 3);
+
   return (
     <section
       className={`${variant === "sidebar" ? "py-0" : "py-18"} flex flex-col gap-8`}

@@ -1,4 +1,5 @@
 import { PaginationItemTypes } from "@/types/common";
+import { NewsItem } from "@/types/news";
 
 export const getPaginationItems = ({
   currentPage,
@@ -35,3 +36,13 @@ export const slugify = (text: string) =>
 
 export const getNewsHref = (category: string, title: string) =>
   `/${category}/${slugify(title)}`;
+
+export const filterCurrentNews = (
+  news: NewsItem[],
+  currentSlug: string,
+  limit?: number,
+) => {
+  const filtered = news.filter((item) => !item.href.endsWith(currentSlug));
+
+  return limit ? filtered.slice(0, limit) : filtered;
+};
