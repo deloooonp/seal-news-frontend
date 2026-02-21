@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { NewsItem } from "@/types/news";
 import { formatDate } from "@/lib/utils";
+import Link from "next/link";
 
 export default function Headline({ news }: { news: NewsItem[] }) {
   const headlineNews = news.slice(0, 5);
@@ -43,10 +44,13 @@ export default function Headline({ news }: { news: NewsItem[] }) {
             <Calendar />
             {formatDate(headlineNews[currentNews].isoDate, "long")}
           </span>
-          <button className="flex items-center gap-2 text-body-md text-primary">
+          <Link
+            href={headlineNews[currentNews].href}
+            className="flex items-center gap-2 text-body-md text-primary hover:underline"
+          >
             Baca Selengkapnya
             <ArrowRight />
-          </button>
+          </Link>
         </div>
         <Image
           src={headlineNews[currentNews].image}
