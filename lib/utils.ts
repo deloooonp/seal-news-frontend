@@ -1,7 +1,4 @@
-interface PaginationItemTypes {
-  currentPage: number;
-  totalPages: number;
-}
+import { PaginationItemTypes } from "@/types/common";
 
 export const getPaginationItems = ({
   currentPage,
@@ -29,3 +26,9 @@ export const getPaginationItems = ({
 
   return pages;
 };
+
+export const slugify = (text: string) =>
+  text
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "");
