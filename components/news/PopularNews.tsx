@@ -3,8 +3,9 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { filterCurrentNews } from "@/lib/utils";
+import { filterCurrentNews, formatDate } from "@/lib/utils";
 import { NewsItem } from "@/types/news";
+import { SectionHeader } from "../ui";
 
 interface Props {
   news: NewsItem[];
@@ -25,10 +26,7 @@ export default function PopularNews({
     <section
       className={`${variant === "sidebar" ? "py-0" : "py-18"} flex flex-col gap-8`}
     >
-      <div className="flex items-center gap-4">
-        <div className="bg-primary w-1 h-8 rounded-xl"></div>
-        <h2 className="text-section-title">Berita Terpopuler</h2>
-      </div>
+      <SectionHeader>Berita Terpopuler</SectionHeader>
       <ul
         className={`flex ${variant === "home" ? "flex-col lg:flex-row items-center gap-6" : "flex-col gap-4"}`}
       >
@@ -57,11 +55,7 @@ export default function PopularNews({
                       </span>
                       <Dot className="hidden md:block text-secondary-text" />
                       <span className="text-body-sm text-secondary-text">
-                        {new Date(item.isoDate).toLocaleDateString("id-ID", {
-                          day: "numeric",
-                          month: "short",
-                          year: "numeric",
-                        })}
+                        {formatDate(item.isoDate)}
                       </span>
                     </div>
                   </div>

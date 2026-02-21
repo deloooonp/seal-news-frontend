@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { NewsItem } from "@/types/news";
 import Button from "@/components/ui/Button";
+import { formatDate } from "@/lib/utils";
 
 export default function NewsDetail({
   newsItem,
@@ -20,11 +21,7 @@ export default function NewsDetail({
         <span className="text-primary">{categoryName}</span>
         <Dot className="text-secondary-text" />
         <span className="text-secondary-text">
-          {new Date(newsItem.isoDate).toLocaleDateString("id-ID", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
+          {formatDate(newsItem.isoDate, "long")}
         </span>
       </div>
       <div className="mt-9 mb-18">
@@ -33,9 +30,9 @@ export default function NewsDetail({
           alt={newsItem.title}
           width={855}
           height={571}
-          className="rounded-lg"
+          className="rounded-lg mb-2"
         />
-        <span className="text-secondary-text italic text-body-md mt-3">
+        <span className="text-secondary-text italic text-body-md">
           {newsItem.title} || CNN News
         </span>
       </div>

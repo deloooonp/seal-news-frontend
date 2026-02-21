@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { NewsItem } from "@/types/news";
+import { formatDate } from "@/lib/utils";
 
 export default function NewsCard({ item }: { item: NewsItem }) {
   return (
@@ -27,11 +28,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
           </span>
           <Dot className="hidden md:block text-secondary-text" />
           <span className="text-body-sm text-secondary-text">
-            {new Date(item.isoDate).toLocaleDateString("id-ID", {
-              day: "numeric",
-              month: "short",
-              year: "numeric",
-            })}
+            {formatDate(item.isoDate)}
           </span>
         </div>
       </Link>

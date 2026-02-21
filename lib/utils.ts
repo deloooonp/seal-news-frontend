@@ -46,3 +46,14 @@ export const filterCurrentNews = (
 
   return limit ? filtered.slice(0, limit) : filtered;
 };
+
+export const formatDate = (
+  isoDate: string,
+  format: "short" | "long" = "short",
+) => {
+  return new Date(isoDate).toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: format,
+    year: "numeric",
+  });
+};

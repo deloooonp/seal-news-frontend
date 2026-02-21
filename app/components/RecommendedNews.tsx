@@ -6,6 +6,7 @@ import { useState } from "react";
 import { NewsItem } from "@/types/news";
 import { getPaginationItems } from "@/lib/utils";
 import NewsCard from "@/components/news/NewsCard";
+import { SectionHeader } from "@/components/ui";
 
 export default function RecommendedNews({ news }: { news: NewsItem[] }) {
   const [currentPage, setCurrentPage] = useState(0);
@@ -33,10 +34,7 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
   return (
     <section className="py-18 flex flex-col gap-8">
       <div className="flex md:flex-row flex-col gap-4 justify-between">
-        <div className="flex items-center gap-4">
-          <div className="bg-primary w-1 h-8 rounded-xl"></div>
-          <h2 className="text-section-title">Rekomendasi Untuk Anda</h2>
-        </div>
+        <SectionHeader>Rekomendasi Untuk Anda</SectionHeader>
         <div className="flex justify-between gap-2 p-4 border border-stroke rounded-lg md:w-1/3">
           <input
             type="text"

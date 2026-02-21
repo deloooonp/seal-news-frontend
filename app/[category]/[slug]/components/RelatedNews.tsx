@@ -1,4 +1,5 @@
 import NewsCard from "@/components/news/NewsCard";
+import { SectionHeader } from "@/components/ui";
 import { filterCurrentNews } from "@/lib/utils";
 
 export default function RelatedNews({
@@ -11,10 +12,7 @@ export default function RelatedNews({
   return (
     <section className="my-20">
       <div className="flex md:flex-row flex-col gap-4 justify-between">
-        <div className="flex items-center gap-4">
-          <div className="bg-primary w-1 h-8 rounded-xl"></div>
-          <h2 className="text-section-title">Berita Terkait</h2>
-        </div>
+        <SectionHeader>Berita Terkait</SectionHeader>
         <button className="text-body-md text-primary bg-primary/20 border border-primary rounded-lg px-5 py-3 hover:bg-primary hover:text-background transition-all hover:scale-110 duration-200 cursor-pointer">
           Lihat Semua
         </button>
