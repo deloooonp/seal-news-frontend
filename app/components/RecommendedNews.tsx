@@ -1,12 +1,10 @@
 "use client";
 
 import { ChevronLeft, ChevronRight, Dot, Search } from "lucide-react";
-import Image from "next/image";
 import { useState } from "react";
 
 import { NewsItem } from "@/types/news";
 import { getPaginationItems, slugify } from "@/lib/utils";
-import Link from "next/link";
 import NewsCard from "@/components/news/NewsCard";
 
 export default function RecommendedNews({ news }: { news: NewsItem[] }) {
@@ -51,9 +49,7 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
       <ul className="grid grid-cols-2 lg:grid-cols-4 gap-14 mb-16">
         {currentNews.map((item, i) => {
           const href = `/${item.category}/${slugify(item.title)}`;
-          return (
-            <NewsCard key={item.title + i} item={item} i={i} href={href} />
-          );
+          return <NewsCard key={item.title + i} item={item} href={href} />;
         })}
       </ul>
       <div className="flex md:flex-row flex-col gap-4 justify-between items-center text-secondary-text">

@@ -6,11 +6,9 @@ import { NewsItem } from "@/types/news";
 
 export default function NewsCard({
   item,
-  i,
   href,
 }: {
   item: NewsItem;
-  i: number;
   href: string;
 }) {
   return (
