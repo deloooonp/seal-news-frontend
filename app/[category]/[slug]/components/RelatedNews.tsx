@@ -1,12 +1,13 @@
 import NewsCard from "@/components/news/NewsCard";
 import { SectionHeader } from "@/components/ui";
 import { filterCurrentNews } from "@/lib/utils";
+import { NewsItem } from "@/types/news";
 
 export default function RelatedNews({
   relatedNews,
   currentSlug,
 }: {
-  relatedNews: any[];
+  relatedNews: NewsItem[];
   currentSlug: string;
 }) {
   return (
