@@ -24,7 +24,7 @@ export default function NewsCard({ item }: { item: NewsItem }) {
         </h2>
         <div className="flex flex-col md:flex-row">
           <span className="text-body-sm text-primary">
-            {item.category.slice(0, 1).toUpperCase() + item.category.slice(1)}
+            {item.categoryLabel}
           </span>
           <Dot className="hidden md:block text-secondary-text" />
           <span className="text-body-sm text-secondary-text">

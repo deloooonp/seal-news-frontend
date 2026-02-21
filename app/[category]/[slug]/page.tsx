@@ -1,8 +1,7 @@
 import { Comments, NewsDetail, RelatedNews } from "./components";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import { Breadcrumbs } from "@/components/ui";
 import PopularNews from "@/components/news/PopularNews";
 import { getHomeData } from "@/lib/api";
-import { slugify } from "@/lib/utils";
 
 export default async function DetailNewsPage({
   params,
@@ -12,16 +11,15 @@ export default async function DetailNewsPage({
   const { category, slug } = await params;
 
   const { popularNews, relatedNews } = await getHomeData(category);
-  const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
-  const newsItem = relatedNews.find((item) => slugify(item.title) === slug);
+  const newsItem = relatedNews.find((item) => item.href.endsWith(slug));
 
   return (
     <main>
-      <Breadcrumbs categoryName={categoryName} />
+      <Breadcrumbs categoryName={newsItem?.categoryLabel ?? category} />
 
       <div className="flex lg:flex-row flex-col justify-between gap-10">
         <div className="flex flex-col">
-          <NewsDetail newsItem={newsItem} categoryName={categoryName} />
+          <NewsDetail newsItem={newsItem} />
           <Comments />
           <RelatedNews relatedNews={relatedNews} currentSlug={slug} />
         </div>

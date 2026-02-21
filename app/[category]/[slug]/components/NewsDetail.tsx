@@ -6,19 +6,13 @@ import { NewsItem } from "@/types/news";
 import Button from "@/components/ui/Button";
 import { formatDate } from "@/lib/utils";
 
-export default function NewsDetail({
-  newsItem,
-  categoryName,
-}: {
-  newsItem?: NewsItem;
-  categoryName: string;
-}) {
+export default function NewsDetail({ newsItem }: { newsItem?: NewsItem }) {
   if (!newsItem) return <div>Berita tidak ditemukan</div>;
   return (
     <section className="mb-30">
       <h1 className="text-display">{newsItem.title}</h1>
       <div className="flex items-center gap-1">
-        <span className="text-primary">{categoryName}</span>
+        <span className="text-primary">{newsItem.categoryLabel}</span>
         <Dot className="text-secondary-text" />
         <span className="text-secondary-text">
           {formatDate(newsItem.isoDate, "long")}

@@ -11,6 +11,10 @@ function transformNews(rawItem: any, category: string): NewsItem {
     image: rawItem.image?.large || rawItem.image?.small || rawItem.image,
     category: category,
     href: getNewsHref(category, rawItem.title),
+    categoryLabel: category
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" "),
   };
 }
 

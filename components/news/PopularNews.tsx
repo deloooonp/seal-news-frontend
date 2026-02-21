@@ -50,8 +50,7 @@ export default function PopularNews({
                     <h2 className="text-body-md line-clamp-3">{item.title}</h2>
                     <div className="flex md:flex-row flex-col tracking-tight">
                       <span className="text-body-sm text-primary">
-                        {item.category.slice(0, 1).toUpperCase() +
-                          item.category.slice(1)}
+                        {item.categoryLabel}
                       </span>
                       <Dot className="hidden md:block text-secondary-text" />
                       <span className="text-body-sm text-secondary-text">
