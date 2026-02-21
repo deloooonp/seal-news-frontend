@@ -1,10 +1,10 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Dot, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useState } from "react";
 
 import { NewsItem } from "@/types/news";
-import { getPaginationItems, slugify } from "@/lib/utils";
+import { getPaginationItems } from "@/lib/utils";
 import NewsCard from "@/components/news/NewsCard";
 
 export default function RecommendedNews({ news }: { news: NewsItem[] }) {
