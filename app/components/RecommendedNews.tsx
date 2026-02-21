@@ -7,6 +7,7 @@ import { useState } from "react";
 import { NewsItem } from "@/types/news";
 import { getPaginationItems, slugify } from "@/lib/utils";
 import Link from "next/link";
+import NewsCard from "@/components/news/NewsCard";
 
 export default function RecommendedNews({ news }: { news: NewsItem[] }) {
   const [currentPage, setCurrentPage] = useState(0);
@@ -51,37 +52,7 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
         {currentNews.map((item, i) => {
           const href = `/${item.category}/${slugify(item.title)}`;
           return (
-            <li key={item.title + i}>
-              <Link
-                href={href}
-                className="hover:bg-primary/15 hover:scale-105 cursor-pointer transition-all duration-250 flex flex-col p-2 rounded-lg"
-              >
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  width={276}
-                  height={197}
-                  className="rounded-xl object-cover"
-                />
-                <h2 className="text-body-lg text-primary-text line-clamp-3 mt-4 mb-3">
-                  {item.title}
-                </h2>
-                <div className="flex flex-col md:flex-row">
-                  <span className="text-body-sm text-primary">
-                    {item.category.slice(0, 1).toUpperCase() +
-                      item.category.slice(1)}
-                  </span>
-                  <Dot className="hidden md:block text-secondary-text" />
-                  <span className="text-body-sm text-secondary-text">
-                    {new Date(item.isoDate).toLocaleDateString("id-ID", {
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric",
-                    })}
-                  </span>
-                </div>
-              </Link>
-            </li>
+            <NewsCard key={item.title + i} item={item} i={i} href={href} />
           );
         })}
       </ul>

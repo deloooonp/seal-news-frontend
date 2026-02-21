@@ -34,7 +34,7 @@ export async function getCNNNews(category: string = ""): Promise<NewsItem[]> {
   }
 }
 
-export async function getHomeData() {
+export async function getHomeData(category?: string) {
   const allCategoriesNews = await Promise.all(
     categories.map((cat) => getCNNNews(cat)),
   );
@@ -46,9 +46,14 @@ export async function getHomeData() {
     .sort(() => Math.random() - 0.5)
     .slice(0, 80);
 
+  const relatedNews = category
+    ? allCategoriesNews[categories.indexOf(category)] || []
+    : [];
+
   return {
     headlineNews,
     popularNews,
     recommendedNews,
+    relatedNews,
   };
 }

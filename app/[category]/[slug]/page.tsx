@@ -1,7 +1,7 @@
-import PopularNews from "@/components/news/PopularNews";
+import { Comments, NewsDetail, RelatedNews } from "./components";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import PopularNews from "@/components/news/PopularNews";
 import { getHomeData } from "@/lib/api";
-import { Comments, NewsDetail } from "./components";
 
 export default async function DetailNewsPage({
   params,
@@ -10,7 +10,7 @@ export default async function DetailNewsPage({
 }) {
   const { category, slug } = await params;
 
-  const { popularNews } = await getHomeData();
+  const { popularNews, relatedNews } = await getHomeData(category);
 
   const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
 
@@ -22,6 +22,7 @@ export default async function DetailNewsPage({
         <div className="flex flex-col">
           <NewsDetail categoryName={categoryName} />
           <Comments />
+          <RelatedNews relatedNews={relatedNews} currentSlug={slug} />
         </div>
         <PopularNews news={popularNews} variant="sidebar" />
       </div>
