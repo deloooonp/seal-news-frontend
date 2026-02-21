@@ -11,14 +11,13 @@ export default async function DetailNewsPage({
   const { category, slug } = await params;
 
   const { popularNews, relatedNews } = await getHomeData(category);
-
   const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
 
   return (
     <main>
       <Breadcrumbs categoryName={categoryName} />
 
-      <div className="flex justify-between gap-10">
+      <div className="flex lg:flex-row flex-col justify-between gap-10">
         <div className="flex flex-col">
           <NewsDetail categoryName={categoryName} />
           <Comments />
