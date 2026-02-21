@@ -1,0 +1,72 @@
+import { Dot } from "lucide-react";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+
+import { filterCurrentNews, formatDate } from "@/lib/utils";
+import { NewsItem } from "@/types/news";
+import { SectionHeader } from "../ui";
+
+interface Props {
+  news: NewsItem[];
+  variant?: "home" | "sidebar";
+  currentSlug?: string;
+}
+
+export default function PopularNews({
+  news,
+  variant = "home",
+  currentSlug,
+}: Props) {
+  const popularNews = currentSlug
+    ? filterCurrentNews(news, currentSlug, 3)
+    : news.slice(0, 3);
+
+  return (
+    <section
+      className={`${variant === "sidebar" ? "py-0" : "py-18"} flex flex-col gap-8`}
+    >
+      <SectionHeader>Berita Terpopuler</SectionHeader>
+      <ul
+        className={`flex ${variant === "home" ? "flex-col lg:flex-row items-center gap-6" : "flex-col gap-4"}`}
+      >
+        {popularNews.map((item, i) => {
+          return (
+            <React.Fragment key={item.title + i}>
+              <li className="w-full relative p-4 cursor-pointer hover:bg-primary/15 hover:scale-105 rounded-xl transition-all duration-250">
+                <Link href={item.href} className="flex gap-4">
+                  <span className="rounded-full bg-foreground absolute left-1 top-1 p-2 text-background z-10 w-9 h-9 items-center justify-center flex text-body-lg">
+                    {i + 1}
+                  </span>
+                  <div className="relative h-40 w-48 lg:h-32 lg:w-40 shrink-0">
+                    <Image
+                      fill
+                      src={item.image}
+                      alt={item.title}
+                      className="object-cover rounded-xl"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <h2 className="text-body-md line-clamp-3">{item.title}</h2>
+                    <div className="flex md:flex-row flex-col tracking-tight">
+                      <span className="text-body-sm text-primary">
+                        {item.categoryLabel}
+                      </span>
+                      <Dot className="hidden md:block text-secondary-text" />
+                      <span className="text-body-sm text-secondary-text">
+                        {formatDate(item.isoDate)}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+              {variant === "home" && i < popularNews.length - 1 && (
+                <div className="hidden lg:block w-px h-20 bg-secondary-text shrink-0"></div>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}

@@ -3,3 +3,8 @@ export interface IconProps {
   size?: number;
   color?: string;
 }
+
+export interface PaginationItemTypes {
+  currentPage: number;
+  totalPages: number;
+}

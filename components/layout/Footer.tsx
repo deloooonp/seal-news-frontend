@@ -33,7 +33,7 @@ export default function Footer() {
         </div>
         <div className="col-span-4 md:col-span-2 lg:col-span-1">
           <h2 className="text-body-xl mb-5">Telusuri</h2>
-          <ul className="flex flex-col gap-4 text-body-md">
+          <ul className="flex flex-col gap-4 text-body-md pl-2 md:pl-0">
             {footerLinks.telusuri.map((item) => (
               <li key={item.text}>
                 <Link
@@ -48,7 +48,7 @@ export default function Footer() {
         </div>
         <div className="col-span-4 md:col-span-2 lg:col-span-1">
           <h2 className="text-body-xl mb-5">Bantuan</h2>
-          <ul className="flex flex-col gap-4 text-body-md">
+          <ul className="flex flex-col gap-4 text-body-md pl-2 md:pl-0">
             {footerLinks.bantuan.map((item) => (
               <li key={item.text}>
                 <Link

@@ -1,11 +1,12 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Dot, Search } from "lucide-react";
-import Image from "next/image";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useState } from "react";
 
 import { NewsItem } from "@/types/news";
 import { getPaginationItems } from "@/lib/utils";
+import NewsCard from "@/components/news/NewsCard";
+import { SectionHeader } from "@/components/ui";
 
 export default function RecommendedNews({ news }: { news: NewsItem[] }) {
   const [currentPage, setCurrentPage] = useState(0);
@@ -33,10 +34,7 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
   return (
     <section className="py-18 flex flex-col gap-8">
       <div className="flex md:flex-row flex-col gap-4 justify-between">
-        <div className="flex items-center gap-4">
-          <div className="bg-primary w-1 h-8 rounded-xl"></div>
-          <h2 className="text-section-title">Rekomendasi Untuk Anda</h2>
-        </div>
+        <SectionHeader>Rekomendasi Untuk Anda</SectionHeader>
         <div className="flex justify-between gap-2 p-4 border border-stroke rounded-lg md:w-1/3">
           <input
             type="text"
@@ -47,36 +45,9 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
         </div>
       </div>
       <ul className="grid grid-cols-2 lg:grid-cols-4 gap-14 mb-16">
-        {currentNews.map((item, i) => (
-          <li key={item.title + i}>
-            <div className="hover:bg-primary/15 hover:scale-105 cursor-pointer transition-all duration-250 flex flex-col p-2 rounded-lg">
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={276}
-                height={197}
-                className="rounded-xl object-cover"
-              />
-              <h2 className="text-body-lg text-primary-text line-clamp-3 mt-4 mb-3">
-                {item.title}
-              </h2>
-              <div className="flex flex-col md:flex-row">
-                <span className="text-body-sm text-primary">
-                  {item.category.slice(0, 1).toUpperCase() +
-                    item.category.slice(1)}
-                </span>
-                <Dot className="hidden md:block text-secondary-text" />
-                <span className="text-body-sm text-secondary-text">
-                  {new Date(item.isoDate).toLocaleDateString("id-ID", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
-                  })}
-                </span>
-              </div>
-            </div>
-          </li>
-        ))}
+        {currentNews.map((item, i) => {
+          return <NewsCard key={item.title + i} item={item} />;
+        })}
       </ul>
       <div className="flex md:flex-row flex-col gap-4 justify-between items-center text-secondary-text">
         <span className="text-body">
