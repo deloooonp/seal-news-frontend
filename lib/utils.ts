@@ -32,3 +32,6 @@ export const slugify = (text: string) =>
     .toLowerCase()
     .replace(/ /g, "-")
     .replace(/[^\w-]+/g, "");
+
+export const getNewsHref = (category: string, title: string) =>
+  `/${category}/${slugify(title)}`;

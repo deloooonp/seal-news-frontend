@@ -33,11 +33,10 @@ export default function PopularNews({
         className={`flex ${variant === "home" ? "flex-col lg:flex-row items-center gap-6" : "flex-col gap-4"}`}
       >
         {popularNews.map((item, i) => {
-          const href = `/${item.category}/${slugify(item.title)}`;
           return (
             <React.Fragment key={item.title + i}>
               <li className="w-full relative p-4 cursor-pointer hover:bg-primary/15 hover:scale-105 rounded-xl transition-all duration-250">
-                <Link href={href} className="flex gap-4">
+                <Link href={item.href} className="flex gap-4">
                   <span className="rounded-full bg-foreground absolute left-1 top-1 p-2 text-background z-10 w-9 h-9 items-center justify-center flex text-body-lg">
                     {i + 1}
                   </span>

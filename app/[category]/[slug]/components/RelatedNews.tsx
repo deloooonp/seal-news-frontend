@@ -24,8 +24,7 @@ export default function RelatedNews({
           .filter((item) => slugify(item.title) !== currentSlug)
           .slice(0, 3)
           .map((item, i) => {
-            const href = `/${item.category}/${slugify(item.title)}`;
-            return <NewsCard key={item.title + i} item={item} href={href} />;
+            return <NewsCard key={item.title + i} item={item} />;
           })}
       </ul>
     </section>

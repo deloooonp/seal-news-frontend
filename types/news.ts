@@ -5,4 +5,5 @@ export interface NewsItem {
   isoDate: string;
   image: string;
   category: string;
+  href: string;
 }

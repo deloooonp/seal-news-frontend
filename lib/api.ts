@@ -1,5 +1,6 @@
 import { categories } from "@/constants/categories";
 import { NewsItem } from "@/types/news";
+import { getNewsHref } from "./utils";
 
 function transformNews(rawItem: any, category: string): NewsItem {
   return {
@@ -9,6 +10,7 @@ function transformNews(rawItem: any, category: string): NewsItem {
     isoDate: rawItem.isoDate,
     image: rawItem.image?.large || rawItem.image?.small || rawItem.image,
     category: category,
+    href: getNewsHref(category, rawItem.title),
   };
 }
 

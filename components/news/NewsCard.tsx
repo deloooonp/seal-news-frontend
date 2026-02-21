@@ -4,17 +4,11 @@ import Link from "next/link";
 
 import { NewsItem } from "@/types/news";
 
-export default function NewsCard({
-  item,
-  href,
-}: {
-  item: NewsItem;
-  href: string;
-}) {
+export default function NewsCard({ item }: { item: NewsItem }) {
   return (
     <li>
       <Link
-        href={href}
+        href={item.href}
         className="hover:bg-primary/15 hover:scale-105 cursor-pointer transition-all duration-250 flex flex-col p-2 rounded-lg"
       >
         <Image

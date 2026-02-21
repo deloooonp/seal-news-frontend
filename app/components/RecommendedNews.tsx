@@ -48,8 +48,7 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
       </div>
       <ul className="grid grid-cols-2 lg:grid-cols-4 gap-14 mb-16">
         {currentNews.map((item, i) => {
-          const href = `/${item.category}/${slugify(item.title)}`;
-          return <NewsCard key={item.title + i} item={item} href={href} />;
+          return <NewsCard key={item.title + i} item={item} />;
         })}
       </ul>
       <div className="flex md:flex-row flex-col gap-4 justify-between items-center text-secondary-text">
