@@ -1,7 +1,20 @@
-export default function page() {
+import {
+  AdsBanner,
+  Headline,
+  PopularNews,
+  RecommendedNews,
+} from "./components";
+import { getHomeData } from "@/lib/api";
+
+export default async function page() {
+  const { headlineNews, popularNews, recommendedNews } = await getHomeData();
+
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <main>
+      <Headline news={headlineNews} />
+      <PopularNews news={popularNews} />
+      <RecommendedNews news={recommendedNews} />
+      <AdsBanner />
+    </main>
   );
 }
