@@ -18,7 +18,7 @@ function transformNews(rawItem: any, category: string): NewsItem {
   };
 }
 
-export async function getCNNNews(category: string = ""): Promise<NewsItem[]> {
+async function getCNNNews(category: string = ""): Promise<NewsItem[]> {
   try {
     const res = await fetch(
       `https://berita-indo-api-next.vercel.app/api/cnn-news/${category}`,
@@ -40,26 +40,29 @@ export async function getCNNNews(category: string = ""): Promise<NewsItem[]> {
   }
 }
 
-export async function getHomeData(category?: string) {
-  const allCategoriesNews = await Promise.all(
-    categories.map((cat) => getCNNNews(cat)),
-  );
+export async function fetchAllNews() {
+  return await Promise.all(categories.map((cat) => getCNNNews(cat)));
+}
 
-  const popularNews = allCategoriesNews.map((news) => news[0]).filter(Boolean);
-  const headlineNews = allCategoriesNews[0];
-  const recommendedNews = allCategoriesNews
-    .flat()
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 80);
-
-  const relatedNews = category
-    ? allCategoriesNews[categories.indexOf(category)] || []
-    : [];
+export async function getHomeData() {
+  const allNews = await fetchAllNews();
 
   return {
-    headlineNews,
-    popularNews,
-    recommendedNews,
-    relatedNews,
+    headlineNews: allNews[0],
+    popularNews: allNews.map((news) => news[0]).filter(Boolean),
+    recommendedNews: allNews
+      .flat()
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 80),
+  };
+}
+
+export async function getDetailData(category: string) {
+  const allNews = await fetchAllNews();
+  const categoryIndex = categories.indexOf(category);
+
+  return {
+    popularNews: allNews.map((news) => news[0]).filter(Boolean),
+    relatedNews: allNews[categoryIndex] || [],
   };
 }

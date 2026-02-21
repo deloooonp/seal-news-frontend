@@ -1,7 +1,7 @@
 import { Comments, NewsDetail, RelatedNews } from "./components";
 import { Breadcrumbs } from "@/components/ui";
 import PopularNews from "@/components/news/PopularNews";
-import { getHomeData } from "@/lib/api";
+import { getDetailData } from "@/lib/api";
 
 export default async function DetailNewsPage({
   params,
@@ -10,7 +10,7 @@ export default async function DetailNewsPage({
 }) {
   const { category, slug } = await params;
 
-  const { popularNews, relatedNews } = await getHomeData(category);
+  const { popularNews, relatedNews } = await getDetailData(category);
   const newsItem = relatedNews.find((item) => item.href.endsWith(slug));
 
   return (
