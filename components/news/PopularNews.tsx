@@ -12,7 +12,9 @@ interface Props {
 export default function PopularNews({ news, variant = "home" }: Props) {
   const popularNews = news.slice(0, 3);
   return (
-    <section className="py-18 flex flex-col gap-8">
+    <section
+      className={`${variant === "sidebar" ? "py-0" : "py-18"} flex flex-col gap-8`}
+    >
       <div className="flex items-center gap-4">
         <div className="bg-primary w-1 h-8 rounded-xl"></div>
         <h2 className="text-section-title">Berita Terpopuler</h2>
