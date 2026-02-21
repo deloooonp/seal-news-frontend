@@ -7,8 +7,9 @@ export default function Breadcrumbs({
 }) {
   return (
     <div className="flex items-center gap-2 text-lg py-16 font-normal text-primary-text">
-      <Home /> Beranda <ChevronRight className="text-secondary-text" />{" "}
-      {categoryName} <ChevronRight className="text-secondary-text" /> Detail
+      <Home className="text-secondary-text" /> Beranda{" "}
+      <ChevronRight className="text-secondary-text" /> {categoryName}{" "}
+      <ChevronRight className="text-secondary-text" /> Detail
     </div>
   );
 }
