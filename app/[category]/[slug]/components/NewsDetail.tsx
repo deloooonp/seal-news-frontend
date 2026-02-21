@@ -1,7 +1,9 @@
 import { Dot } from "lucide-react";
 import Image from "next/image";
-import { NewsItem } from "@/types/news";
 import Link from "next/link";
+
+import { NewsItem } from "@/types/news";
+import Button from "@/components/ui/Button";
 
 export default function NewsDetail({
   newsItem,
@@ -38,11 +40,11 @@ export default function NewsDetail({
         </span>
       </div>
       <p className="text-body-md mb-10">{newsItem.contentSnippet}</p>
-      <button className="bg-primary text-white px-4 py-2 rounded-lg">
+      <Button>
         <Link href={newsItem.link} target="_blank">
           Baca Selengkapnya
         </Link>
-      </button>
+      </Button>
     </section>
   );
 }

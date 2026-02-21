@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 import { COMMENTS_MOCK } from "@/constants/comments";
+import Button from "@/components/ui/Button";
 
 export default function Comments() {
   return (
@@ -29,9 +30,7 @@ export default function Comments() {
               0/50
             </span>
           </div>
-          <button className="bg-primary text-background px-10 py-3 rounded-lg text-body-md w-fit hover:bg-primary/80 hover:scale-105 transition-all cursor-pointer">
-            Kirim
-          </button>
+          <Button>Kirim</Button>
         </div>
       </div>
 
