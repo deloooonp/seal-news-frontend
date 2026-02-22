@@ -10,12 +10,15 @@ export default async function DetailNewsPage({
 }) {
   const { category, slug } = await params;
 
-  const { popularNews, relatedNews } = await getDetailData(category);
+  const { popularNews, relatedNews } = await getDetailData(category, slug);
   const newsItem = relatedNews.find((item) => item.href.endsWith(slug));
+
+  const breadcrumbLabel =
+    category === "terbaru" ? "Terbaru" : (newsItem?.categoryLabel ?? category);
 
   return (
     <main>
-      <Breadcrumbs categoryName={newsItem?.categoryLabel ?? category} />
+      <Breadcrumbs categoryName={breadcrumbLabel} />
 
       <div className="flex lg:flex-row flex-col justify-between gap-10">
         <div className="flex flex-col">

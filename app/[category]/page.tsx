@@ -7,11 +7,13 @@ export default async function CategoryPage({
   params: { category: string };
 }) {
   const { category } = await params;
-  const news = await getCNNNews(category);
+  const news = (await getCNNNews(category)).slice(0, 80);
 
+  const headerTitle =
+    category === "terbaru" ? "Terbaru" : news[0].categoryLabel;
   return (
     <main>
-      <NewsContainer header={news[0].categoryLabel} news={news} />
+      <NewsContainer header={headerTitle} news={news} />
     </main>
   );
 }

@@ -9,7 +9,7 @@ import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 
 export default function Headline({ news }: { news: NewsItem[] }) {
-  const headlineNews = news.slice(0, 5);
+  const headlineNews = news;
 
   const [currentNews, setCurrentNews] = useState(0);
 
