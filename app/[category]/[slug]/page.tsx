@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { Comments, NewsDetail, RelatedNews } from "./components";
 import { Breadcrumbs } from "@/components/ui";
 import PopularNews from "@/components/news/PopularNews";
@@ -12,6 +13,10 @@ export default async function DetailNewsPage({
 
   const { popularNews, relatedNews } = await getDetailData(category, slug);
   const newsItem = relatedNews.find((item) => item.href.endsWith(slug));
+
+  if (!newsItem) {
+    notFound();
+  }
 
   const breadcrumbLabel =
     category === "terbaru" ? "Terbaru" : (newsItem?.categoryLabel ?? category);
