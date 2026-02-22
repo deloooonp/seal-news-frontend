@@ -3,25 +3,31 @@ import { NewsItem } from "@/types/news";
 import { getNewsHref } from "./utils";
 
 function transformNews(rawItem: any, category: string): NewsItem {
+  const categoryMatch = rawItem.link?.match(/cnnindonesia\.com\/([^/]+)\//);
+  const originalCategory = categoryMatch ? categoryMatch[1] : category;
+
+  const displayCategory = originalCategory
+    .split("-")
+    .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+
   return {
     title: rawItem.title,
     link: rawItem.link,
     contentSnippet: rawItem.contentSnippet,
     isoDate: rawItem.isoDate,
     image: rawItem.image?.large || rawItem.image?.small || rawItem.image,
-    category: category,
-    href: getNewsHref(category, rawItem.title),
-    categoryLabel: category
-      .split("-")
-      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(" "),
+    category: originalCategory,
+    href: getNewsHref(originalCategory, rawItem.title),
+    categoryLabel: displayCategory,
   };
 }
 
-async function getCNNNews(category: string = ""): Promise<NewsItem[]> {
+export async function getCNNNews(category: string = ""): Promise<NewsItem[]> {
   try {
+    const endpoint = category === "terbaru" ? "" : category;
     const res = await fetch(
-      `https://berita-indo-api-next.vercel.app/api/cnn-news/${category}`,
+      `https://berita-indo-api-next.vercel.app/api/cnn-news/${endpoint}`,
       {
         next: { revalidate: 3600 },
       },
@@ -40,29 +46,35 @@ async function getCNNNews(category: string = ""): Promise<NewsItem[]> {
   }
 }
 
-export async function fetchAllNews() {
-  return await Promise.all(categories.map((cat) => getCNNNews(cat)));
-}
-
 export async function getHomeData() {
-  const allNews = await fetchAllNews();
+  const [terbaruNews, ...allCategoriesRaw] = await Promise.all([
+    getCNNNews("terbaru"),
+    ...categories.map((cat) => getCNNNews(cat)),
+  ]);
 
   return {
-    headlineNews: allNews[0],
-    popularNews: allNews.map((news) => news[0]).filter(Boolean),
-    recommendedNews: allNews
-      .flat()
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 80),
+    headlineNews: terbaruNews.slice(0, 5),
+    popularNews: allCategoriesRaw.map((news) => news[0]).filter(Boolean),
+    recommendedNews: terbaruNews.slice(0, 80),
   };
 }
 
-export async function getDetailData(category: string) {
-  const allNews = await fetchAllNews();
-  const categoryIndex = categories.indexOf(category);
+export async function getDetailData(category: string, slug: string) {
+  const isTerbaru = category === "terbaru";
+
+  const [targetCategoryNews, terbaruNews] = await Promise.all([
+    getCNNNews(isTerbaru ? "terbaru" : category),
+    getCNNNews("terbaru"),
+  ]);
+
+  let relatedNews = targetCategoryNews;
+
+  if (isTerbaru || targetCategoryNews.length === 0) {
+    relatedNews = terbaruNews;
+  }
 
   return {
-    popularNews: allNews.map((news) => news[0]).filter(Boolean),
-    relatedNews: allNews[categoryIndex] || [],
+    popularNews: terbaruNews.slice(0, 5),
+    relatedNews: relatedNews,
   };
 }

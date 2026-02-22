@@ -67,9 +67,9 @@ export default function Footer() {
             <input
               type="text"
               placeholder="Masukan email"
-              className="outline-none"
+              className="outline-none w-2/3"
             />
-            <button className="bg-primary rounded-lg p-3 cursor-pointer hover:bg-primary/80 transition-all hover:scale-110">
+            <button className="bg-primary  rounded-lg p-3 cursor-pointer hover:bg-primary/80 transition-all hover:scale-110">
               <Send className="text-background" />
             </button>
           </div>

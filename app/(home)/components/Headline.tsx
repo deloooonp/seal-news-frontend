@@ -9,7 +9,7 @@ import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 
 export default function Headline({ news }: { news: NewsItem[] }) {
-  const headlineNews = news.slice(0, 5);
+  const headlineNews = news;
 
   const [currentNews, setCurrentNews] = useState(0);
 
@@ -57,7 +57,7 @@ export default function Headline({ news }: { news: NewsItem[] }) {
           alt={headlineNews[currentNews].title}
           width={550}
           height={300}
-          className="rounded-2xl object-cover w-full"
+          className="rounded-2xl object-cover w-full lg:w-1/2 "
         />
       </div>
       <div className="flex justify-center gap-4 text-body-md text-primary-text">
