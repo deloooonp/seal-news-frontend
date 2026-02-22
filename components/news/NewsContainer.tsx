@@ -8,7 +8,13 @@ import { getPaginationItems } from "@/lib/utils";
 import NewsCard from "@/components/news/NewsCard";
 import { SectionHeader } from "@/components/ui";
 
-export default function RecommendedNews({ news }: { news: NewsItem[] }) {
+export default function RecommendedNews({
+  news,
+  header,
+}: {
+  header: string;
+  news: NewsItem[];
+}) {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 8;
 
@@ -34,7 +40,7 @@ export default function RecommendedNews({ news }: { news: NewsItem[] }) {
   return (
     <section className="py-18 flex flex-col gap-8">
       <div className="flex md:flex-row flex-col gap-4 justify-between">
-        <SectionHeader>Rekomendasi Untuk Anda</SectionHeader>
+        <SectionHeader>{header}</SectionHeader>
         <div className="flex justify-between gap-2 p-4 border border-stroke rounded-lg md:w-1/3">
           <input
             type="text"

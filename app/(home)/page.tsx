@@ -1,5 +1,5 @@
-import { AdsBanner, Headline, RecommendedNews } from "./components";
-import PopularNews from "@/components/news/PopularNews";
+import { AdsBanner, Headline } from "./components";
+import { PopularNews, NewsContainer } from "@/components/news";
 import { getHomeData } from "@/lib/api";
 
 export default async function page() {
@@ -9,7 +9,7 @@ export default async function page() {
     <main>
       <Headline news={headlineNews} />
       <PopularNews news={popularNews} />
-      <RecommendedNews news={recommendedNews} />
+      <NewsContainer news={recommendedNews} header="Rekomendasi Untuk Anda" />
       <AdsBanner />
     </main>
   );
