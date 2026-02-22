@@ -18,7 +18,7 @@ function transformNews(rawItem: any, category: string): NewsItem {
   };
 }
 
-async function getCNNNews(category: string = ""): Promise<NewsItem[]> {
+export async function getCNNNews(category: string = ""): Promise<NewsItem[]> {
   try {
     const res = await fetch(
       `https://berita-indo-api-next.vercel.app/api/cnn-news/${category}`,
